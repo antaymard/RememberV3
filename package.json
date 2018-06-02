@@ -1,9 +1,15 @@
 {
   "name": "Remember with ReactJS",
+  "version": "3.0.0",
+  "description": "Version 3 of Remember, made with ReactJS !",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antaymard/RememberV3.git"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
