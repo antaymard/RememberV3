@@ -1,0 +1,38 @@
+.loginMain {
+  height: 100vh;
+  /* background: rgba(84, 153, 248, 0.69);  */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.inputCard {
+  background-color: white;
+  width: 75%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.moreIcon {
+  color : white;
+  animation: moveDown 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes moveDown {
+  0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+  100% {
+      transform: translateY(0px);
+      opacity: 1;
+  }
+}
