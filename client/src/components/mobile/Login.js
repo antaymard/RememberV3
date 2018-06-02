@@ -12,8 +12,8 @@ var Cookies = require('js-cookie');
 export default class Login extends Component {
 
   state = {
-    username : "antaymard",
-    password : "splinter",
+    username : "",
+    password : "",
     snackbarIsOpen : false,
     connectionFeedback : ""
   }

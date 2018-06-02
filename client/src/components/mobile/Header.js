@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
+
 import { Link } from "react-router-dom";
 
 
@@ -80,12 +81,12 @@ export default class Header extends Component {
             Remember.
           </div>
           <div>
-            <button onClick={this.handleMenuOpen}
+            <IconButton onClick={this.handleMenuOpen}
               aria-owns={this.state.anchorEl ? 'simple-menu' : null}
               aria-haspopup="true"
             >
               <ProfilePic imgAddress={this.state.profilePicUrl}/>
-            </button>
+            </IconButton>
             <Menu
               anchorEl={this.state.anchorEl}
               open={Boolean(this.state.anchorEl)}
