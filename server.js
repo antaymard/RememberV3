@@ -10,10 +10,12 @@ const colors    = require('colors');
 const path      = require('path');
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config = require('./config') || process.env; // get our config file
 var User   = require('./db/user.js'); // get our mongoose model
 var Svnr = require('./db/svnr.js');
 var Comment = require('./db/comment.js');
+
+// var config = require('./config'); // get our config file
+var config = process.env;
 
 
 var passwordHash = require('password-hash');
