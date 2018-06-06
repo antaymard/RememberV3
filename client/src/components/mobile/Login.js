@@ -25,7 +25,7 @@ export default class Login extends Component {
     e.preventDefault();
     if (this.state.username === "" || this.state.password === "") {
       this.setState({ snackbarIsOpen : true });
-      this.setState({ connectionFeedback : "Please fill username and password" });
+      this.setState({ connectionFeedback : "Veuillez renseignez un nom d'utilisateur et un mot de passe" });
       return false
     }
     // post CREDENTIALS => response will be token

@@ -17,8 +17,10 @@ var Comment = require('./db/comment.js');
 // var config = require('./config'); // get our config file
 var config = process.env;
 
-
 var passwordHash = require('password-hash');
+
+// before deploying
+// 1- change config
 
 // =============================================================================
 // CONFIGURATION ===============================================================

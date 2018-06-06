@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
 
 import AddIcon from '@material-ui/icons/Add';
 
 import CollapsedPic from '../CollapsedPic.js';
-import ProfilePic from '../ProfilePic.js';
+import FriendsDialog from '../FriendsDialog.js';
 
 var Cookies = require('js-cookie');
 var token = Cookies.get('token');
@@ -44,34 +43,16 @@ const style = {
     height : "40px",
     width : "40px"
   },
-  dialogTitle : {
-    backgroundColor : '#6c90c7',
-    fontSize : '20px',
-    color : 'white',
-    height : "50px",
-    width : '100%',
-    padding : '13px',
-    position : 'fixed'
-  },
-  dialogContent : {
-    padding : '63px 13px 13px 13px',
-  },
-  sharedPicDiv : {
-    marginRight : '13px',
-    alignItems : 'center'
-  }
 }
 
 
 export default class DescriptionCard extends Component {
 
   state = {
-    dialogIsOpen : false,
-    friendList : []
+    dialogIsOpen : false
   }
 
   componentDidMount() {
-    this.getFriendList();
   }
 
   // met en forme les paragraphs
@@ -84,64 +65,16 @@ export default class DescriptionCard extends Component {
     ))
   }
 
-  // DIALOG
-  handleDialogClose = () => {
-    this.setState({ dialogIsOpen : false });
-  }
-
+  // FRIENDSDIALOG FUNCTIONS
   handleDialogOpen = () => {
+    console.log("cliekd")
     this.setState({ dialogIsOpen : true });
+    console.log(this.state)
+  }
+  onCloseFunction = (a) => {
+    this.setState({ dialogIsOpen : false })
   }
 
-  getFriendList = () => {
-    fetch('/api/getFriendsList', {
-      method : 'get',
-      headers : {
-        Accept : 'application/json',
-        'Content-Type' : 'application/json',
-        'x-access-token' : token
-      },
-    })
-    .then(res => res.json())
-    .then(res => {
-      if (res.success) {
-        console.log(res)
-        this.setState({ friendList : res.friendList })
-      }
-    })
-  }
-
-  renderFriendList = () => {
-    return this.state.friendList.map((a, i) => (
-      <div className='colFlex' style={style.sharedPicDiv} key={i}
-        onClick={() => this.shareWithFriend(a._id)}>
-        <ProfilePic imgAddress={a.photo_address}/>
-        <p style={{paddingTop : '5px'}}>{a.username}</p>
-      </div>
-    ))
-  }
-
-  shareWithFriend = (id) => {
-    fetch('/api/addSharedFriend', {
-      method : 'post',
-      headers : {
-        Accept : 'application/json',
-        'Content-Type' : 'application/json',
-        'x-access-token' : token
-      },
-      body : JSON.stringify({
-        sharedFriend : id,
-        svnrId : this.props.idSvnr
-      })
-    })
-    .then(res => res.json())
-    .then(res => {
-      if (res.success) {
-        console.log(res)
-        console.log(res.message)
-      }
-    })
-  }
 
   render() {
     return (
@@ -161,15 +94,12 @@ export default class DescriptionCard extends Component {
             </IconButton>
           </div>
         </div>
-        <Dialog
-          open={this.state.dialogIsOpen}
-          onClose={this.handleDialogClose}>
-          <div style={style.dialogTitle}>PARTAGER...</div>
-          <div className='rowFlex' style={style.dialogContent}>
-            {this.renderFriendList()}
-          </div>
-
-        </Dialog>
+        <FriendsDialog
+          type='ADD_SHARED_FRIENDS'
+          isOpen={this.state.dialogIsOpen}
+          onCloseFunction={this.onCloseFunction}
+          idSvnr={this.props.idSvnr}
+        />
       </Paper>
     )
   }
