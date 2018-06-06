@@ -60,7 +60,7 @@ export default class MyCarousel extends Component {
           naturalSlideWidth={50}
           naturalSlideHeight={50}
           totalSlides={this.props.images.length}
-          // lockOnWindowScroll = {true}
+          lockOnWindowScroll = {true}
           currentSlide = {this.state.currentSlide}
           style={{margin : "0 -7px"}}>
           <Slider
