@@ -8,7 +8,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import DoneIcon from '@material-ui/icons/Done';
 
 
-import MapContainer from '../MapContainer.js';
+import LocationSearchInput from '../LocationSearchInput.js';
 
 
 import Header from '../Header.js';
@@ -344,7 +344,7 @@ export default class Edit extends Component {
               />
             </div>
             <div style={style.content}>
-              <MapContainer sendAddressToParent={this.getAddressFromChild}/>
+              <LocationSearchInput sendAddressToParent={this.getAddressFromChild}/>
             </div>
           </Card>
           <Card className='cardPadding' style={style.card}>

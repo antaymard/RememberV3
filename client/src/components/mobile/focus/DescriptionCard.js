@@ -7,9 +7,6 @@ import AddIcon from '@material-ui/icons/Add';
 import CollapsedPic from '../CollapsedPic.js';
 import FriendsDialog from '../FriendsDialog.js';
 
-var Cookies = require('js-cookie');
-var token = Cookies.get('token');
-
 const style = {
   main : {
     color : "black",

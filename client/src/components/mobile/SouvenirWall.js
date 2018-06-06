@@ -35,15 +35,30 @@ var style = {
 export default class SouvenirWall extends Component {
 
   state = {
-    success : "loading"
+    success : "loading",
+    skip : 0
   }
 
   componentDidMount() {
     this.getSouvenirList();
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.skip !== nextState.skip) {
+      console.log(this.state.skip)
+      this.getSouvenirList();
+    }
+  }
+
   getSouvenirList = () => {
-    fetch('/api/recall_souvenir_wall?token=' + Cookies.get('token'))
+    fetch('/api/recall_souvenir_wall?skip=' + this.state.skip, {
+      method : 'GET',
+      headers : {
+        Accept : 'application/json',
+        'Content-Type' : 'application/json',
+        'x-access-token' : Cookies.get('token')
+      }
+    })
     .then(res => res.json())
     .then((res) => {
       this.setState({ success : res.success, souvenirList : res.souvenirList, message : res.message })
@@ -89,7 +104,7 @@ export default class SouvenirWall extends Component {
   renderEmptyCards = () => {
     var empty = [1];
     return empty.map(a => (
-      <Card className="cardPadding" style={style.souvenirCard} className='cardPadding'  key={a} style={{opacity : 0.7}}>
+      <Card className="cardPadding" style={style.souvenirCard} key={a} style={{opacity : 0.7}}>
         <div className='rowFlex' style={{ width : '100%'}}>
           <div className='rowFlex' style={{ width : '100%'}}>
             <ProfilePic/>
@@ -113,13 +128,32 @@ export default class SouvenirWall extends Component {
     ))
   }
 
+  loadMoreLess = (action) => {
+    if (action === "MORE") {
+      var _i = this.state.skip+1;
+      this.setState(prevState => ({ skip : prevState.skip+1}));
+    } else if (action === "LESS") {
+      this.setState(prevState => ({ skip : prevState.skip-1}));
+    }
+    console.log(this.state.skip)
+  }
+
   render() {
-    console.log(this.state)
     if (this.state.success === true) {
       return (
         <div>
           <div className="colFlex underHeaderDiv" style={{justifyContent : 'center'}}>
+            {this.state.skip > 0 ? <Card style={style.souvenirCard}
+              onClick={() => this.loadMoreLess("LESS")}
+              className='cardPadding'>
+              DISPLAY LESS
+            </Card> : null}
             {this.renderSouvenirCards()}
+            <Card style={style.souvenirCard}
+              onClick={() => this.loadMoreLess("MORE")}
+              className='cardPadding'>
+              DISPLAY MORE
+            </Card>
           </div>
             <Link to='/create'>
               <Button variant="fab" style={style.fabBtn} color="secondary">

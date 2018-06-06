@@ -202,7 +202,7 @@ apiRoutes.get('/recall_souvenir_wall', function(req,res) {
     if (err) return console.error(err);
     // console.log(svnrs);
     res.json({ success : true, souvenirList : svnrs});
-  }).populate("createdBy").sort("-creation_date").limit(10);
+  }).populate("createdBy").sort("-creation_date").limit(15).skip(15*Number(req.query.skip));
 });
 
 // Récupère les infos du souvenir pour le focus

@@ -9,6 +9,7 @@ import MyCarousel from '../MyCarousel.js';
 import DescriptionCard from './DescriptionCard.js';
 import DateFrom from '../DateFrom.js';
 import Anecdotes from './Anecdotes.js';
+import Maps from '../Maps.js';
 
 var Cookies = require('js-cookie');
 
@@ -56,11 +57,11 @@ export default class FocusSouvenir extends Component {
               </div>
               <DateFrom date={s.creation_date}/>
             </div>
-            <div style={{marginTop : "15px"}}>
+            <div style={{margin : "15px 0px 7px 0px"}}>
               <MyCarousel images={s.file_addresses} clickable={true}/>
             </div>
             <div>
-
+              <Maps lieu={s.lieu}/>
             </div>
             <div className='colFlex'>
               <DescriptionCard text={s.description}
