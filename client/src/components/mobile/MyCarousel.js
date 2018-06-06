@@ -57,6 +57,7 @@ export default class MyCarousel extends Component {
     return (
       <div>
         <CarouselProvider
+          hasMasterSpinner={true}
           naturalSlideWidth={50}
           naturalSlideHeight={50}
           totalSlides={this.props.images.length}

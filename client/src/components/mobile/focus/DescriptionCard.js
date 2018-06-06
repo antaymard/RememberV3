@@ -99,6 +99,7 @@ export default class DescriptionCard extends Component {
           isOpen={this.state.dialogIsOpen}
           onCloseFunction={this.onCloseFunction}
           idSvnr={this.props.idSvnr}
+          alreadySelected={this.props.shared}
         />
       </Paper>
     )

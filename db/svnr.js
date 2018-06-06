@@ -6,8 +6,8 @@ module.exports = mongoose.model('Svnr', new Schema({
 	// userid : String,
   createdBy : [{type : mongoose.Schema.Types.ObjectId, ref : "User"}],
   titre : String,
-  lieu : String,
-	latLng : Object,	// ??
+  lieu : Object,
+	// latLng : Object,	// ??
   file_addresses : Array,
   // svnr_date_in : {
   //   day: Number,

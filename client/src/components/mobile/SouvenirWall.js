@@ -79,17 +79,17 @@ export default class SouvenirWall extends Component {
             </div>
           </div>
           <div style={style.locationDiv}>
-            <LocationIcon style={{height : "17px", color : '#6c90c7'}}/>
-            {a.lieu}
+            <LocationIcon style={{height : "15px", color : '#6c90c7'}}/>
+            {a.lieu ? (a.lieu.placeName ? a.lieu.placeName : a.lieu) : "Pas de lieu"}
           </div>
         </Card>
     ))
   }
 
   renderEmptyCards = () => {
-    var empty = [1, 2, 3];
+    var empty = [1];
     return empty.map(a => (
-      <Card className="cardPadding" style={style.souvenirCard} key={a} style={{opacity : 0.7}}>
+      <Card className="cardPadding" style={style.souvenirCard} className='cardPadding'  key={a} style={{opacity : 0.7}}>
         <div className='rowFlex' style={{ width : '100%'}}>
           <div className='rowFlex' style={{ width : '100%'}}>
             <ProfilePic/>

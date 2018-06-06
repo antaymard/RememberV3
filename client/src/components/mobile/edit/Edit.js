@@ -295,8 +295,7 @@ export default class Edit extends Component {
           idSvnr : "",            // to pass if EDIT
           titre : s.titre,
           description : s.description,
-          lieu : s.lieu.placeName,
-          latLng : s.lieu.latLng,
+          lieu : s.lieu,
           svnr_date : s.date,
           file_addresses : imgArray,
           presentFriends : s.presentFriends

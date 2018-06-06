@@ -240,7 +240,7 @@ apiRoutes.post('/editOrCreateSvnr', (req, res) => {
       svnr.titre = s.titre;
       svnr.description = s.description;
       svnr.lieu = s.lieu;
-      svnr.latLng = s.latLng;
+      // svnr.latLng = s.latLng;
       svnr.file_addresses = s.file_addresses;
       svnr.presentFriends = s.presentFriends;
     })
@@ -249,7 +249,7 @@ apiRoutes.post('/editOrCreateSvnr', (req, res) => {
     	createdBy : req.decoded,
     	titre : s.titre,
     	lieu : s.lieu,
-      latLng : s.latLng,
+      // latLng : s.latLng,
     	svnr_date : s.svnr_date,
     	creation_date : new Date(),
     	description : s.description,
@@ -285,13 +285,26 @@ apiRoutes.post('/addNewComment', (req, res) => {
   })
 })
 
-apiRoutes.post('/addSharedFriend', (req, res) => {
-  Svnr.update(
-    { _id : req.body.svnrId},
-    {$push : { sharedFriends : req.body.sharedFriend }}, (err, result) => {
-      if (err) return console.error('Pb sharing ' + err);
-      res.json({ success : true, message : result });
+apiRoutes.post('/manageSharedFriend', (req, res) => {
+  console.log(req.body)
+  if (req.body.action === 'ADD') {
+    Svnr.update(
+      { _id : req.body.svnrId},
+      {$push : { sharedFriends : req.body.sharedFriend }}, (err, result) => {
+        if (err) return console.error('Pb sharing ' + err);
+        console.log(result)
+        res.json({ success : true, message : result });
     })
+  } else if (req.body.action === "REMOVE") {
+    Svnr.update(
+      { _id : req.body.svnrId},
+      { $pullAll : { sharedFriends : [req.body.sharedFriend] }}, (err, result) => {
+        if (err) return console.error('Pb sharing ' + err);
+        console.log(result)
+        res.json({ success : true, message : result });
+    })
+  }
+
 })
 
 

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import Header from '../Header.js';
 import ProfilePic from '../ProfilePic.js';
 import DisplayDate from '../DisplayDate.js';
@@ -60,7 +63,8 @@ export default class FocusSouvenir extends Component {
 
             </div>
             <div className='colFlex'>
-              <DescriptionCard text={s.description} shared={s.sharedFriends}
+              <DescriptionCard text={s.description}
+                shared={s.sharedFriends}
                 idSvnr={this.props.id.params.id}/>
             </div>
             <div className='colFlex'>
@@ -70,7 +74,23 @@ export default class FocusSouvenir extends Component {
         </div>
       );
     } else {
-      return <p>Loading</p>
+      return (
+        <div>
+          <Header type="FocusView"/>
+          <div className='colFlex underHeaderDiv'
+            style={{
+              alignItems : 'center',
+              justifyContent : 'center',
+              height : '500px'
+            }}>
+            <CircularProgress
+              color="secondary"
+              size={70}
+              thickness={2}
+            />
+          </div>
+        </div>
+      )
     }
   }
 }
