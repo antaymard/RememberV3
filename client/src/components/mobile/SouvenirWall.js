@@ -41,6 +41,7 @@ export default class SouvenirWall extends Component {
 
   componentDidMount() {
     this.getSouvenirList();
+    // Cookies.remove('token', { path: '' }); // removed!
   }
 
   componentWillUpdate(nextProps, nextState) {
