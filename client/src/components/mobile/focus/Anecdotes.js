@@ -126,6 +126,7 @@ export default class Anectodes extends Component {
     .then(res => res.json())
     .then(res => {
       if (res.success) {
+        this.setState({ newComment : ''})
         this.getAnecdotes();
       } else {
         this.setState({ snackbarIsOpen : true});
