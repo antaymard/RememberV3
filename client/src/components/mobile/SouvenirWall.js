@@ -101,7 +101,7 @@ export default class SouvenirWall extends Component {
           </div>
           <div style={style.locationDiv}>
             <LocationIcon style={{height : "15px", color : '#6c90c7'}}/>
-            {a.lieu.placeName || a.lieu}
+            {a.lieu.placeName}
           </div>
         </Card>
     ))

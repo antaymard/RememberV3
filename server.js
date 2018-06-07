@@ -14,7 +14,7 @@ var User   = require('./db/user.js'); // get our mongoose model
 var Svnr = require('./db/svnr.js');
 var Comment = require('./db/comment.js');
 
-// var config = require('./config'); // get our config file
+//var config = require('./config'); // get our config file
 var config = process.env;
 
 var passwordHash = require('password-hash');
