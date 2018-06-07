@@ -71,6 +71,11 @@ export default class SouvenirWall extends Component {
   }
 
   renderSouvenirCards = () => {
+    // this.state.souvenirList.map(a => (
+    //   // a.lieu.placeName && a.lieu.placeName !== '' ? console.log('1' + a.lieu.placeName) : console.log("2" + a.lieu)
+    //   console.log(a.lieu.placeName || a.lieu)
+    // ))
+    // return 'LOL'
     return this.state.souvenirList.map(a => (
         <Card style={style.souvenirCard} className='cardPadding' key={a._id}>
           <div className='rowFlex'>
@@ -96,7 +101,7 @@ export default class SouvenirWall extends Component {
           </div>
           <div style={style.locationDiv}>
             <LocationIcon style={{height : "15px", color : '#6c90c7'}}/>
-            {a.lieu ? (a.lieu.placeName ? a.lieu.placeName : a.lieu) : "Pas de lieu"}
+            {a.lieu.placeName || a.lieu}
           </div>
         </Card>
     ))
@@ -140,6 +145,7 @@ export default class SouvenirWall extends Component {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.success === true) {
       return (
         <div>

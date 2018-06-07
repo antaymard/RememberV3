@@ -40,7 +40,7 @@ export default class Maps extends Component {
   }
 
   render() {
-    if (this.props.lieu && this.props.lieu.placeName) {
+    if (this.props.lieu && this.props.lieu.placeName && this.props.lieu.latLng) {
       return (
         <MyMapComponent
           isMarkerShown
