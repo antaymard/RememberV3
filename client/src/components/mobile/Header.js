@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
-
-import Menu from '@material-ui/core/Menu';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-
 import { Link } from "react-router-dom";
 
+import IconButton from '@material-ui/core/IconButton';
 
 import BackIcon from '@material-ui/icons/ArrowBack';
-import MoreIcon from '@material-ui/icons/MoreHoriz';
+// import MoreIcon from '@material-ui/icons/MoreHoriz';
 import LogOutIcon from '@material-ui/icons/PowerSettingsNew';
+import EditIcon from '@material-ui/icons/Edit';
 
 import ProfilePic from './ProfilePic.js';
 import whiteLogo from '../siteSrc/whitelogo.png'
-// import Header from './Header.js';
 
 var Cookies = require('js-cookie');
 
@@ -47,7 +40,8 @@ const style = {
 export default class Header extends Component {
   state = {
     anchorEl : null,
-    profilePicUrl : null
+    profilePicUrl : null,
+    dialogIsOpen : false
   }
 
   componentDidMount() {
@@ -63,6 +57,8 @@ export default class Header extends Component {
       this.setState({ profilePicUrl : res })
     })
   }
+
+  // Menu déroulant
   handleMenuOpen = (e) => {
     // console.log(e.currentTarget)
     this.setState({ anchorEl: e.currentTarget });
@@ -70,6 +66,15 @@ export default class Header extends Component {
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
   }
+
+  // Dialog
+  handleDialogOpen = () => {
+    console.log(window.location.href)
+    this.setState({ dialogIsOpen: true });
+  };
+  handleDialogClose = () => {
+    this.setState({ dialogIsOpen: false });
+  };
 
   render() {
 
@@ -87,7 +92,7 @@ export default class Header extends Component {
             >
               <ProfilePic imgAddress={this.state.profilePicUrl}/>
             </IconButton>
-            <Menu
+            {/* <Menu
               anchorEl={this.state.anchorEl}
               open={Boolean(this.state.anchorEl)}
               onClose={this.handleMenuClose}
@@ -100,7 +105,7 @@ export default class Header extends Component {
                   <ListItemText inset primary="Se déconnecter"/>
                 </MenuItem>
               </MenuList>
-            </Menu>
+            </Menu> */}
           </div>
         </div>
       );
@@ -117,7 +122,13 @@ export default class Header extends Component {
             </Link>
           </div>
           <div>
-            <MoreIcon/>
+            <IconButton onClick={this.handleMenuOpen}
+              aria-owns={this.state.anchorEl ? 'simple-menu' : null}
+              aria-haspopup="true"
+              style={{ color : 'white'}}
+            >
+              <EditIcon/>
+            </IconButton>
           </div>
         </div>
       );

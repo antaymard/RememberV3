@@ -14,10 +14,14 @@ var User   = require('./db/user.js'); // get our mongoose model
 var Svnr = require('./db/svnr.js');
 var Comment = require('./db/comment.js');
 
-//var config = require('./config'); // get our config file
+// var config = require('./config'); // get our config file
 var config = process.env;
 
 var passwordHash = require('password-hash');
+
+// TINYPNG SHIT
+var tinify = require("tinify");
+tinify.key = "wpmznfn7MXAweJeAMF1uPIKBmKOYe-2r";
 
 // before deploying
 // 1- change config
@@ -33,9 +37,6 @@ app.use(bodyParser.json());
 
 // use morgan to log requests to the console
 app.use(morgan('dev'));
-	 // .use(express.static('styles'))                                          // Deprecated ?
-	 // .use(express.static('scripts'))
-   // .use(express.static('./ImgUsers'))
 
 app.set('tokenSecret', config.secret); // secret variable
 
@@ -62,14 +63,32 @@ mongoose.connection.on('open', function() {
 // TESTING =====================================================================
 
 
-// Svnr.deleteOne({ _id: '5b0d9963f552960de7c1c06e' }, function (err) {
+// Svnr.deleteOne({ _id: '5b1a83b0279431045f015837' }, function (err) {
 //   if (err) return console.error(err);
 //   // deleted at most one tank document
+//   console.log('Deleted'.success);
 // });
 
 
 // =============================================================================
 // FUNCTIONS ===================================================================
+
+// Compress image from url in S3 bucket, and then put it back in
+function launchImgCompression(url) {
+  var source = tinify.fromUrl(url);
+  var fileName = url.split('/ImgSvnr/');
+  fileName = fileName[1];
+  source.store({
+    service: "s3",
+    aws_access_key_id: "AKIAIVQEE7RUD52NP77Q",
+    aws_secret_access_key: "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",
+    region: "eu-west-1",
+    path: "rememberbucket/ImgSvnr/" + fileName
+  }, (err, response) => {
+    console.log(err)
+    console.log(response)
+  })
+}
 
 
 // =============================================================================
@@ -244,7 +263,8 @@ apiRoutes.post('/editOrCreateSvnr', (req, res) => {
       svnr.file_addresses = s.file_addresses;
       svnr.presentFriends = s.presentFriends;
     })
-  } else if (req.body.typeOfAction === "CREER") {
+  }
+  else if (req.body.typeOfAction === "CREER") {
     var n = new Svnr({
     	createdBy : req.decoded,
     	titre : s.titre,
@@ -263,6 +283,10 @@ apiRoutes.post('/editOrCreateSvnr', (req, res) => {
       }
       console.log("souvenir enregistré".green);
       console.log(dat);
+      for (var _i = 0; _i < dat.file_addresses.length; _i++) {
+        console.log("Compression launched " + dat.file_addresses[_i]);
+        launchImgCompression(dat.file_addresses[_i]);
+      }
       res.json({ success : true });
   })
   }

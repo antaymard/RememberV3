@@ -7,9 +7,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import DoneIcon from '@material-ui/icons/Done';
 
-
 import LocationSearchInput from '../LocationSearchInput.js';
-
 
 import Header from '../Header.js';
 
@@ -59,6 +57,7 @@ const style = {
 
 const configFile = require('../config.js');
 var Cookies = require('js-cookie');
+
 
 // AMAZON S3 SHIT
 const AWS = window.AWS;
@@ -216,7 +215,7 @@ export default class Edit extends Component {
 
     // console.log('==========================', file);
 
-    var fileName = this.generateRandomFileName(50) + 'png';
+    var fileName = this.generateRandomFileName(50) + 'jpg'; // ACCORDING TO TYPE !
     var albumPhotosKey = encodeURIComponent(albumName) + '/';
     var photoKey = albumPhotosKey + fileName;
 
@@ -268,11 +267,15 @@ export default class Edit extends Component {
   }
 
   getAddressFromChild = (ad) => {
-    this.setState( {lieu : {
-      placeName : ad.placeName,
-      latLng : ad.latLng
+    this.setState({
+      lieu : {
+        placeName : ad.placeName,
+        latLng : ad.latLng
     }});
-    //console.log(this.state.lieu)
+    console.log('DEBUGGING - getAddressFromChild triggered');
+    console.log("Recieved from child is " + ad.placeName + " + " + ad.latLng.lat + " + " + ad.latLng.lng)
+    this.setState({ snackbarIsOpen : true });
+    this.setState({ snackbarMessage : ad.placeName + " + " + ad.latLng.lat + " + " + ad.latLng.lng });
   }
 
   onDoneBtnPressed = () => {
