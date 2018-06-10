@@ -14,14 +14,14 @@ var User   = require('./db/user.js'); // get our mongoose model
 var Svnr = require('./db/svnr.js');
 var Comment = require('./db/comment.js');
 
-// var config = require('./config'); // get our config file
-var config = process.env;
+var config = require('./config'); // get our config file
+//var config = process.env;
 
 var passwordHash = require('password-hash');
 
 // TINYPNG SHIT
 var tinify = require("tinify");
-tinify.key = "wpmznfn7MXAweJeAMF1uPIKBmKOYe-2r";
+tinify.key = config.tinifyKey;
 
 // before deploying
 // 1- change config
@@ -63,7 +63,7 @@ mongoose.connection.on('open', function() {
 // TESTING =====================================================================
 
 
-// Svnr.deleteOne({ _id: '5b1a83b0279431045f015837' }, function (err) {
+// Svnr.deleteOne({ _id: "5b1bff37d075bd00148a1ddb" }, function (err) {
 //   if (err) return console.error(err);
 //   // deleted at most one tank document
 //   console.log('Deleted'.success);
@@ -80,8 +80,8 @@ function launchImgCompression(url) {
   fileName = fileName[1];
   source.store({
     service: "s3",
-    aws_access_key_id: "AKIAIVQEE7RUD52NP77Q",
-    aws_secret_access_key: "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",
+    aws_access_key_id: config.awsId,
+    aws_secret_access_key: config.awsSecretKey,
     region: "eu-west-1",
     path: "rememberbucket/ImgSvnr/" + fileName
   }, (err, response) => {
@@ -143,11 +143,11 @@ apiRoutes.post('/authenticate', (req, res) => {
       return console.log('no user');
     } else if (user) {
 			// check if password matches
-			// if (!passwordHash.verify(req.body.password, user.password)) {
-      if (req.body.password !== user.password) {
+			if (!passwordHash.verify(req.body.password, user.password)) {
+      // if (req.body.password !== user.password) {
 				res.json({ success: false, message: 'Authentication failed : wrong password.' });
         console.log("tried to login : FAIL - wrong password")
-			} else {
+			} else if (passwordHash.verify(req.body.password, user.password)){
         console.log("connection ok".success);
 				// if user is found and password is right
 				// create a token
@@ -221,7 +221,7 @@ apiRoutes.get('/recall_souvenir_wall', function(req,res) {
     if (err) return console.error(err);
     // console.log(svnrs);
     res.json({ success : true, souvenirList : svnrs});
-  }).populate("createdBy").sort("-creation_date").limit(15).skip(15*Number(req.query.skip));
+  }).populate("createdBy").sort("-creation_date").limit(5).skip(5*Number(req.query.skip));
 });
 
 // Récupère les infos du souvenir pour le focus

@@ -55,15 +55,17 @@ const style = {
   },
 }
 
-const configFile = require('../config.js');
 var Cookies = require('js-cookie');
 
+// var config = require('./config'); // get our config file
+//var config = process.env;
+const config = require('../config.js');
 
 // AMAZON S3 SHIT
 const AWS = window.AWS;
 var albumBucketName = 'rememberbucket';
 var bucketRegion = 'eu-west-1';
-var IdentityPoolId = configFile.IdentityPoolId;
+var IdentityPoolId = config.IdentityPoolId;
 AWS.config.update({
   region: bucketRegion,
   credentials: new AWS.CognitoIdentityCredentials({
