@@ -14,7 +14,7 @@ var User   = require('./db/user.js'); // get our mongoose model
 var Svnr = require('./db/svnr.js');
 var Comment = require('./db/comment.js');
 
-//var config = require('./config'); // get our config file
+// var config = require('./config'); // get our config file
 var config = process.env;
 
 var passwordHash = require('password-hash');
@@ -63,7 +63,7 @@ mongoose.connection.on('open', function() {
 // TESTING =====================================================================
 
 
-// Svnr.deleteOne({ _id: "5b1bff37d075bd00148a1ddb" }, function (err) {
+// Svnr.deleteOne({ _id: "5b2ea82e4f2fd35c134c1d3e" }, function (err) {
 //   if (err) return console.error(err);
 //   // deleted at most one tank document
 //   console.log('Deleted'.success);
@@ -224,7 +224,7 @@ apiRoutes.get('/recall_souvenir_wall', function(req,res) {
   }).populate("createdBy").sort("-creation_date").limit(5).skip(5*Number(req.query.skip));
 });
 
-// Récupère les infos du souvenir pour le focus
+// Récupère les infos du souvenir pour le focus // TODO: securize !!!
 apiRoutes.get('/getSvnrInfo', (req, res) => {
   console.log("working".operations)
   Svnr.findOne({ '_id' : req.query.id }, (err, svnr) => {
@@ -245,8 +245,6 @@ apiRoutes.get('/getSvnrInfo', (req, res) => {
       return res.json({ success : false, message : 'No matching memory'});
     }
   }).populate("createdBy sharedFriends")
-
-
   // send only if id is createdBy or shared !!
 })
 
@@ -254,15 +252,22 @@ apiRoutes.post('/editOrCreateSvnr', (req, res) => {
   var s = req.body.svnrInfo;
   // EDIT SOUVENIR
   if (req.body.typeOfAction === "EDITER") {
-    Svnr.findById(s.idSvnr, (err, svnr) => {
-      if (err) return console.error('Error getting Svnr to edit ', err);
-      svnr.titre = s.titre;
-      svnr.description = s.description;
-      svnr.lieu = s.lieu;
-      // svnr.latLng = s.latLng;
-      svnr.file_addresses = s.file_addresses;
-      svnr.presentFriends = s.presentFriends;
-    })
+    console.log(s);
+    Svnr.update({$and: [{ _id: s.idSvnr }, { createdBy: req.decoded}]}, { $set: {
+      titre: s.titre,
+      lieu : s.lieu,
+      svnr_date : s.svnr_date,
+    	description : s.description,
+      presentFriends : s.presentFriends
+    }}, (err, dat) => {
+      if (err) return console.log("Error updating svnr ".error, err);
+      console.log(dat)
+      if (dat.ok == 1) { // to change
+        res.json({
+          success : true
+        })
+      }
+    });
   }
   else if (req.body.typeOfAction === "CREER") {
     var n = new Svnr({

@@ -29,7 +29,15 @@ const style = {
 }
 
 export default class LocationSearchInput extends Component {
-  state = { placeName: '' }
+  state = {
+    placeName: this.props.placeName
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.placeName != this.props.placeName) {
+      this.setState({ placeName : nextProps.placeName })
+    }
+  }
 
   handleChange = (placeName) => {
     this.setState({ placeName })
@@ -50,6 +58,7 @@ export default class LocationSearchInput extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <PlacesAutocomplete
         value={this.state.placeName}
@@ -63,7 +72,7 @@ export default class LocationSearchInput extends Component {
               label="Lieu"
               type="text"
               {...getInputProps({
-                // placeholder: 'Lieu',
+                // placeholder: this.props.placeName,
                 // className ??
               })}
             />

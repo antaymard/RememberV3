@@ -57,8 +57,6 @@ const style = {
 
 var Cookies = require('js-cookie');
 
-// var config = require('./config'); // get our config file
-//var config = process.env;
 const config = require('../config.js');
 
 // AMAZON S3 SHIT
@@ -93,12 +91,17 @@ export default class Edit extends Component {
     // inputs
     description : "",
     titre : "",
-    date : null,
+    date : "",
     lieu : {
       placeName : '',
-      latLng : {}
+      latLng : {
+        lat : '',
+        lng : ''
+      }
     },
     presentFriends : [],
+    // if Edited
+    idSvnr : ''
   }
 
   componentDidMount() {
@@ -107,9 +110,11 @@ export default class Edit extends Component {
 
   // CREER ou EDITER dans le header
   setHeaderTitle = () => {
-    if (this.props.match.url === '/create') {
+    if (this.props.match &&  this.props.match.url === '/create') {
       return this.setState({ pageType : 'CREER'});
-    } else {
+    } else if (window.location.href.split('/edit/').length !== 0) {
+      this.setState({ idSvnr : window.location.href.split('/edit/')[1]})
+      this.getSvnrData(window.location.href.split('/edit/')[1]);
       return this.setState({ pageType : 'EDITER'})
     }
   }
@@ -280,6 +285,39 @@ export default class Edit extends Component {
     this.setState({ snackbarMessage : ad.placeName + " + " + ad.latLng.lat + " + " + ad.latLng.lng });
   }
 
+  // EDIT SVNR
+  getSvnrData = (id) => {
+    fetch('/api/getSvnrInfo?id='+ id + '&token=' + Cookies.get('token'))
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      if (res.success) {
+        var date = new Date(res.svnr.svnr_date);
+        if (date.getMonth()+1 < 10) {
+          date.month = '0' + Number(date.getMonth()+1);
+        }
+        this.setState({
+          description : res.svnr.description,
+          titre : res.svnr.titre,
+          date : date.getYear()+1900 + '-' + date.month + '-' + Number(date.getDate()),
+          lieu : {
+            placeName : res.svnr.lieu.placeName,
+            latLng : {
+              lat : res.svnr.lieu.latLng ? res.svnr.lieu.latLng.lat : "",
+              lng : res.svnr.lieu.latLng ? res.svnr.lieu.latLng.lng : ''
+            }
+          }
+        });
+      } else if (res.success === false) {
+        // DISPLAY 'NOT ALLOWED TO EDIT' in snackbar
+        this.setState({
+          snackbarIsOpen : true,
+          snackbarMessage : 'You are not allowed to edit this souvenir'
+        })
+      }
+    })
+  }
+
   onDoneBtnPressed = () => {
     var token = Cookies.get('token');
     var s = this.state;
@@ -297,7 +335,7 @@ export default class Edit extends Component {
       body : JSON.stringify({
         typeOfAction : s.pageType, // CREATE or EDIT
         svnrInfo : {
-          idSvnr : "",            // to pass if EDIT
+          idSvnr : s.idSvnr,            // to pass if EDIT
           titre : s.titre,
           description : s.description,
           lieu : s.lieu,
@@ -343,13 +381,17 @@ export default class Edit extends Component {
               DATE ET LIEU
             </div>
             <div style={style.content}>
-              <TextField style={style.input}
+              <TextField
+                style={style.input}
+                value={this.state.date}
                 type="date"
                 onChange={this.handleInput('date')}
               />
             </div>
             <div style={style.content}>
-              <LocationSearchInput sendAddressToParent={this.getAddressFromChild}/>
+              <LocationSearchInput
+                placeName={this.state.lieu.placeName}
+                sendAddressToParent={this.getAddressFromChild}/>
             </div>
           </Card>
           <Card className='cardPadding' style={style.card}>

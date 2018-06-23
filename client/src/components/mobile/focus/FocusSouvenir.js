@@ -52,7 +52,7 @@ export default class FocusSouvenir extends Component {
                 <ProfilePic imgAddress={s.createdBy[0].photo_address}/>
                 <div className='colFlex' style={{marginLeft : '10px'}}>
                   <p>{s.titre}</p>
-                  <DisplayDate date={s.creation_date}/>
+                  <DisplayDate date={s.svnr_date}/>
                 </div>
               </div>
               <DateFrom date={s.creation_date}/>

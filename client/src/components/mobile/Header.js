@@ -59,13 +59,13 @@ export default class Header extends Component {
   }
 
   // Menu déroulant
-  handleMenuOpen = (e) => {
-    // console.log(e.currentTarget)
-    this.setState({ anchorEl: e.currentTarget });
-  }
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-  }
+  // handleMenuOpen = (e) => {
+  //   // console.log(e.currentTarget)
+  //   this.setState({ anchorEl: e.currentTarget });
+  // }
+  // handleMenuClose = () => {
+  //   this.setState({ anchorEl: null });
+  // }
 
   // Dialog
   handleDialogOpen = () => {
@@ -122,13 +122,11 @@ export default class Header extends Component {
             </Link>
           </div>
           <div>
-            <IconButton onClick={this.handleMenuOpen}
-              aria-owns={this.state.anchorEl ? 'simple-menu' : null}
-              aria-haspopup="true"
-              style={{ color : 'white'}}
-            >
+            <Link to={"/edit/" + window.location.href.split('svnr/')[1] }>
+            <IconButton style={{ color : 'white'}}>
               <EditIcon/>
             </IconButton>
+            </Link>
           </div>
         </div>
       );

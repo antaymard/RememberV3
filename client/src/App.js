@@ -58,6 +58,7 @@ class App extends Component {
               <Route exact path="/" component={MobileView} />
               <Route path="/svnr/:id" render={(id) => <FocusSouvenir id={id.match}/>} />
               <Route path='/create' component={Edit}/>
+              <Route path='/edit' render={(id) => <Edit id={id.match}/>}/>
             </div>
           </BrowserRouter>
         </MuiThemeProvider>
