@@ -77,6 +77,7 @@ export default class SouvenirWall extends Component {
     // ))
     // return 'LOL'
     return this.state.souvenirList.map(a => (
+      <li>
         <Card style={style.souvenirCard} className='cardPadding' key={a._id}>
           <div className='rowFlex'>
             <div className='rowFlex'>
@@ -104,6 +105,7 @@ export default class SouvenirWall extends Component {
             {a.lieu.placeName}
           </div>
         </Card>
+      </li>
     ))
   }
 
@@ -155,7 +157,9 @@ export default class SouvenirWall extends Component {
               className='cardPadding'>
               DISPLAY LESS
             </Card> : null}
-            {this.renderSouvenirCards()}
+            <ul style={{listStyleType:"none"}}>
+              {this.renderSouvenirCards()}
+            </ul>
             <Card style={style.souvenirCard}
               onClick={() => this.loadMoreLess("MORE")}
               className='cardPadding'>
