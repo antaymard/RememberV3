@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat300,400');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
+
+button:focus {outline:0;}
 
 * {
   box-sizing: border-box;

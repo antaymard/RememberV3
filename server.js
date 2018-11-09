@@ -109,6 +109,14 @@ app.get('/decode/:token', function(req, res) {
   });
 });
 
+app.get('/getNumberOfUploadedMemories', (req,res) => {
+  Svnr.count({}, (err, number) => {
+    if (err) return console.log("error counting memories");
+    res.json(number);
+  })
+})
+
+// TO ATUHENTICATE !!
 app.get('/getAnecdotes/:id', (req,res) => {
   Comment.find({ svnrId : req.params.id }, (err, comments) => {
     if (err) {

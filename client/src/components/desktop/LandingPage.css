@@ -1,0 +1,182 @@
+.mainContainer {
+  width : 85%;
+  margin : auto;
+  padding : 10px 0 0 0;
+  z-index: 0;
+}
+
+.landingPageDesktopHeader {
+  display : flex;
+  flex-direction : row;
+  justify-content : space-between;
+  align-items : center;
+  font-size: 14px;
+  height: 40px;
+  z-index: 1;
+}
+
+.headerLogoDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: inherit;
+}
+.headerLogoDiv h1 {
+  font-size: inherit;
+}
+
+.headerRightDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: inherit;
+  color : #616161;
+  font-weight: 500;
+}
+.headerRightLinks {
+  margin-right: 60px;
+  text-decoration: none;
+  font-size: inherit;
+  color: inherit;
+  font-weight: inherit;
+}
+.headerRightLinks:hover {
+  border-bottom: 1.5px solid #616161;
+}
+
+.signUpBtn {
+  background-color: #6c90c7;
+  width: auto;
+  height: 40px;
+  text-align: center;
+  color: white;
+  border-radius: 50px;
+  padding: 0 30px;
+  cursor: pointer;
+}
+
+
+/* NOTE: PREMIER CONTAINER */
+.firstMarketingDiv {
+  height: 530px;
+  /* background: url('../siteSrc/frontmain.jpg');
+  background-size: cover;
+  background-position: right bottom; */
+  z-index: -2;
+}
+.leftFMD {
+  z-index: 1;
+  width: 50%;
+}
+.leftFMD h1 {
+  font-size: 40px;
+  font-weight: 400;
+}
+.leftFMD h2 {
+  font-size: 15px;
+  font-weight: 400;
+  color: #616161;
+  margin-top: 1px;
+}
+.leftFMD h2:last-of-type {
+  font-size: 15px;
+  font-weight: 400;
+  color: #616161;
+  margin-bottom: 60px;
+}
+
+.rightFMD {
+  height: inherit;
+  z-index: inherit;
+}
+.rightFMD img {
+  height: inherit;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* NOTE: SECOND CONTAINER */
+.secondMarketingDiv {
+  padding-bottom: 70px;
+}
+.secondMarketingDiv h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.bubbleDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: black;
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 0px 0px;
+}
+.bubbleDiv h3 {
+  font-size: 30px;
+  color: #6c90c7;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.bubbleDiv p {
+  text-align: center;
+}
+.betweenBubbleLine {
+  width: 7%;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+/* NOTE: FEATURES DIV */
+.thirdMarketingDiv {
+  padding : 150px 0;
+}
+.thirdMarketingDiv .featureSection {
+  margin-bottom: 150px;
+}
+.thirdMarketingDiv .captionDiv {
+  width: 50%;
+}
+.thirdMarketingDiv .captionDiv h3 {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  color: #6c90c7;
+  margin-bottom: 10px;
+}
+.thirdMarketingDiv .captionDiv h4 {
+  margin: 0 0 35px 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+.thirdMarketingDiv .captionDiv p {
+  margin: 0 0 15px 0;
+  font-size: 15px;
+  line-height: 2.5;
+}
+.thirdMarketingDiv .captionDiv ul {
+  margin-left: 30px;
+}
+
+.thirdMarketingDiv .captionDiv li {
+  line-height: 2.5;
+}
+
+/* NOTE: COUNTING MEMORIES */
+.countingDiv {
+  margin: 70px auto;
+  width: 400px;
+  background-color: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
