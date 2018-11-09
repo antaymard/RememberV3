@@ -9,7 +9,7 @@ import './App.css';
 import MobileView from './components/mobile/MobileView.js';
 import FocusSouvenir from './components/mobile/focus/FocusSouvenir.js';
 import Edit from './components/mobile/edit/Edit.js';
-import LandingPageMobile from './components/desktop/LandingPage.js';
+import LandingPage from './components/desktop/LandingPage.js';
 
 const theme = createMuiTheme({
   palette: {
@@ -67,7 +67,7 @@ class App extends Component {
     } else {
       return (
         <MuiThemeProvider theme={theme}>
-          <LandingPageMobile />
+          <LandingPage/>
         </MuiThemeProvider>
       );
     }
