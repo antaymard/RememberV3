@@ -45,14 +45,26 @@
 }
 
 .signUpBtn {
-  background-color: #6c90c7;
+  background-color: white;
+  color: #6c90c7;
+  border: 1px solid #6c90c7;
+  /* background-color: #6c90c7;
+  color: white; */
   width: auto;
   height: 40px;
   text-align: center;
-  color: white;
   border-radius: 50px;
   padding: 0 30px;
   cursor: pointer;
+}
+.signUpBtn:hover {
+  /* background-color: white;
+  color: #6c90c7;
+  border: 1px solid #6c90c7; */
+  background-color: #6c90c7;
+  color: white;
+  border: 1px solid #6c90c7;
+  transition: 0.1s;
 }
 
 
@@ -71,6 +83,16 @@
 .leftFMD h1 {
   font-size: 40px;
   font-weight: 400;
+}
+.mainRemember h1{
+  font-weight: 400;
+  color: #616161;
+  font-size: 30px;
+}
+.bigLogo {
+  height: 55px;
+  width: 55px;
+  margin-right: 10px;
 }
 .leftFMD h2 {
   font-size: 15px;
@@ -98,11 +120,55 @@
   z-index: -1;
 }
 
-/* NOTE: SECOND CONTAINER */
-.secondMarketingDiv {
+/* NOTE: FONCTIONNE COMME VOTRE MEMOIRE */
+.workingLikeMemoryMarketingDiv h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* NOTE: FEATURES DIV */
+.featuresMarketingDiv {
+  padding : 150px 0;
+}
+.featuresMarketingDiv .featureSection {
+  margin-bottom: 150px;
+}
+.featuresMarketingDiv .captionDiv {
+  width: 50%;
+}
+.featuresMarketingDiv .captionDiv h3 {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  color: #6c90c7;
+  margin-bottom: 10px;
+}
+.featuresMarketingDiv .captionDiv h4 {
+  margin: 0 0 35px 0;
+  font-size: 26px;
+  font-weight: 500;
+}
+.featuresMarketingDiv .captionDiv p {
+  margin: 0 0 15px 0;
+  font-size: 15px;
+  line-height: 2.5;
+}
+.featuresMarketingDiv .captionDiv ul {
+  margin-left: 30px;
+}
+
+.featuresMarketingDiv .captionDiv li {
+  line-height: 2.5;
+}
+
+/* NOTE: CONTAINER BLEU AVEC LES BULLES */
+.creatingAMemoryMarketingDiv {
   padding-bottom: 70px;
 }
-.secondMarketingDiv h2 {
+.creatingAMemoryMarketingDiv h2 {
   color: white;
   font-size: 20px;
   font-weight: 500;
@@ -134,41 +200,6 @@
 .betweenBubbleLine {
   width: 7%;
   border-bottom: 1px solid rgba(255,255,255,0.5);
-}
-
-/* NOTE: FEATURES DIV */
-.thirdMarketingDiv {
-  padding : 150px 0;
-}
-.thirdMarketingDiv .featureSection {
-  margin-bottom: 150px;
-}
-.thirdMarketingDiv .captionDiv {
-  width: 50%;
-}
-.thirdMarketingDiv .captionDiv h3 {
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: 600;
-  color: #6c90c7;
-  margin-bottom: 10px;
-}
-.thirdMarketingDiv .captionDiv h4 {
-  margin: 0 0 35px 0;
-  font-size: 26px;
-  font-weight: 500;
-}
-.thirdMarketingDiv .captionDiv p {
-  margin: 0 0 15px 0;
-  font-size: 15px;
-  line-height: 2.5;
-}
-.thirdMarketingDiv .captionDiv ul {
-  margin-left: 30px;
-}
-
-.thirdMarketingDiv .captionDiv li {
-  line-height: 2.5;
 }
 
 /* NOTE: COUNTING MEMORIES */
