@@ -42,24 +42,24 @@ export default class LandingPage extends Component {
                 <h1>Remember</h1>
               </div>
               <div className="headerRightDiv">
-                <a className="headerRightLinks" href='*'>Features</a>
-                <a className="headerRightLinks" href='*'>Apps & WebApp</a>
-                <a className="headerRightLinks" href='*'>Log in</a>
-                <button className="signUpBtn" href='*'>Sign up</button>
+                <a className="headerRightLinks" href='#'>Features</a>
+                <a className="headerRightLinks" href='#'>Apps & WebApp</a>
+                <a className="headerRightLinks" href='#'>Log in</a>
+                <button className="signUpBtn" href='#'>Sign up</button>
               </div>
             </div>
 
             {/* Premier container avec info et image */}
             <div className="rowFlex firstMarketingDiv">
               <div className="colFlex leftFMD">
-                <h1>Your private memory box</h1>
-                <h2>Remember is your private space to keep your memories</h2>
+                <h1>More than pictures: Memories.</h1>
+                <h2>Remember is your private space to keep your memories.</h2>
                 <h2>People, sentimental objects, places, moments... Save them to remember them.</h2>
                 <div style={{marginBottom : "20px"}}>
                   <TextField
                     id="email-input"
                     label="Email"
-                    type="password"
+                    type="text"
                     margin="normal"
                     style={{marginRight:'20px'}}
                   />
@@ -110,7 +110,7 @@ export default class LandingPage extends Component {
           <div className="colFlex mainContainer thirdMarketingDiv">
             <div className="rowFlex featureSection">
               <div className="pictureDiv">
-                LOLILOL
+                (PICTURE HERE)
               </div>
               <div className="captionDiv">
                 <h3>Taking too many pictures?</h3>
@@ -126,10 +126,10 @@ export default class LandingPage extends Component {
                 <p>Remember allows you to add many types of memories.</p>
                 <p>Never forget the teacher that changed your life, the house you grew up in, your childhood dog, your favorite teenage song, a sentance your lover always says...</p>
               </div>
-              <div>LOLILOL</div>
+              <div>(PICTURE HERE)</div>
             </div>
             <div className="rowFlex featureSection">
-              <div>LOLILOL</div>
+              <div>(PICTURE HERE)</div>
               <div className="captionDiv">
                 <h3>Can't tell where this photo was taken?</h3>
                 <h4>Memories are so much more than just pictures</h4>
@@ -145,15 +145,15 @@ export default class LandingPage extends Component {
             </div>
             <div className="rowFlex">
               <div>Focus sur le contexte</div>
-              <div>LOLILOL</div>
+              <div>(PICTURE HERE)</div>
             </div>
             <div className="rowFlex">
-              <div>LOLILOL</div>
+              <div>(PICTURE HERE)</div>
               <div>Search (by friend, map)</div>
             </div>
             <div className="rowFlex">
               <div>Focus sur le random</div>
-              <div>LOLILOL</div>
+              <div>(PICTURE HERE)</div>
             </div>
           </div>
         </div>
