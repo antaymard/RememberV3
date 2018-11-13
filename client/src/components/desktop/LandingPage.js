@@ -4,7 +4,7 @@ import './LandingPage.css';
 
 import appImage from '../siteSrc/App.jpg';
 import logo from '../siteSrc/bluelogo.png';
-import firstImage from '../siteSrc/frontmain5.png';
+import firstImage from '../siteSrc/frontmain6.png';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
